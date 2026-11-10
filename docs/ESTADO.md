@@ -4,8 +4,8 @@
 
 ## Cómo empezar (cada integrante, en su máquina)
 
-~~bash
-git clone <URL_DEL_REPO> && cd proyecto4-proxysql
+```bash
+git clone https://github.com/Killance01/proyecto4-proxysql.git && cd proyecto4-proxysql
 cp .env.example .env
 docker compose up -d
 # Antes de inicializar ProxySQL, comprobar que el cnf aplicó solo (debe haber 3 servidores y 8 reglas):
@@ -13,7 +13,9 @@ docker exec proxysql mysql -uadmin -padmin -h127.0.0.1 -P6032 -e "SELECT hostgro
 ./scripts/init-replication.sh
 ./scripts/init-proxysql.sh
 curl -s localhost:5000/write; curl -s localhost:5000/read
-~~
+```
+
+Repositorio privado: acepta la invitación como colaborador y autentícate al clonar (SSH: git@github.com:Killance01/proyecto4-proxysql.git, o HTTPS con token / gh auth login).
 
 Si algo falla, abre un Issue con la salida completa. Tu primer arranque ES la prueba de clon limpio: reportarlo vale como tarea.
 
