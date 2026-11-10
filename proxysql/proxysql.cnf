@@ -1,0 +1,136 @@
+# ProxySQL - Proyecto 4 (credenciales de laboratorio)
+# Este archivo SOLO se lee en el primer arranque (sin proxysql.db).
+# libconfig exige escapar la barra invertida: \\( produce \( en la regex.
+datadir="/var/lib/proxysql"
+
+admin_variables=
+{
+  admin_credentials="admin:admin;radmin:radmin"
+  mysql_ifaces="0.0.0.0:6032"
+}
+
+mysql_variables=
+{
+  interfaces="0.0.0.0:6033"
+  max_connections=2048
+  multiplexing=true
+  commands_stats=true
+  monitor_username="monitor"
+  monitor_password="monitor"
+  monitor_ping_interval=2000
+  monitor_read_only_interval=1500
+}
+
+mysql_servers =
+(
+  {
+    address="mysql-master"
+    port=3306
+    hostgroup=10
+    weight=1
+    max_connections=100
+  },
+  {
+    address="mysql-slave1"
+    port=3306
+    hostgroup=20
+    weight=1
+    max_connections=200
+  },
+  {
+    address="mysql-slave2"
+    port=3306
+    hostgroup=20
+    weight=1
+    max_connections=200
+  }
+)
+
+mysql_replication_hostgroups =
+(
+  {
+    writer_hostgroup=10
+    reader_hostgroup=20
+    comment="cluster principal"
+  }
+)
+
+mysql_users =
+(
+  {
+    username="app_user"
+    password="app_password"
+    default_hostgroup=10
+    transaction_persistent=1
+    fast_forward=0
+    active=1
+  }
+)
+
+mysql_query_rules =
+(
+  {
+    rule_id=1
+    active=1
+    match_digest="^SELECT .* FOR UPDATE"
+    destination_hostgroup=10
+    apply=1
+    comment="SELECT FOR UPDATE al maestro"
+  },
+  {
+    rule_id=2
+    active=1
+    match_digest="^SELECT @@"
+    destination_hostgroup=10
+    apply=1
+    comment="variables de sesion al maestro"
+  },
+  {
+    rule_id=3
+    active=1
+    match_digest="^SELECT .*(NOW|RAND|UUID)\\("
+    destination_hostgroup=10
+    apply=1
+    comment="no deterministas al maestro"
+  },
+  {
+    rule_id=4
+    active=1
+    match_digest="^SELECT"
+    destination_hostgroup=20
+    apply=1
+    comment="SELECT a esclavos"
+  },
+  {
+    rule_id=5
+    active=1
+    match_digest="^(INSERT|REPLACE)"
+    destination_hostgroup=10
+    apply=1
+    comment="INSERT/REPLACE al maestro"
+  },
+  {
+    rule_id=6
+    active=1
+    match_digest="^UPDATE"
+    destination_hostgroup=10
+    apply=1
+    comment="UPDATE al maestro"
+  },
+  {
+    rule_id=7
+    active=1
+    match_digest="^DELETE"
+    destination_hostgroup=10
+    apply=1
+    comment="DELETE al maestro"
+  },
+  {
+    rule_id=8
+    active=1
+    match_digest="^(CREATE|ALTER|DROP|TRUNCATE)"
+    destination_hostgroup=10
+    apply=1
+    comment="DDL al maestro"
+  }
+)

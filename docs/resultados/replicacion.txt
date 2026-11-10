@@ -1,0 +1,15 @@
+# 2026-11-10 04:22:11
+== mysql-slave1
+                  Source_Host: mysql-master
+           Replica_IO_Running: Yes
+          Replica_SQL_Running: Yes
+        Seconds_Behind_Source: 0
+                Last_IO_Error: 
+               Last_SQL_Error: 
+== mysql-slave2
+                  Source_Host: mysql-master
+           Replica_IO_Running: Yes
+          Replica_SQL_Running: Yes
+        Seconds_Behind_Source: 0
+                Last_IO_Error: 
+               Last_SQL_Error: 

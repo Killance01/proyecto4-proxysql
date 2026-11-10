@@ -1,0 +1,4 @@
+services:
+  proxysql:
+    ports:
+      - "${PROXYSQL_ADMIN_PORT:-6032}:6032"

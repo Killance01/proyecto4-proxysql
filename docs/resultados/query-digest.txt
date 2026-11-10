@@ -1,0 +1,19 @@
++-----------+--------------------------------------------------------------+------------+--------+
+| hostgroup | consulta                                                     | count_star | avg_us |
++-----------+--------------------------------------------------------------+------------+--------+
+| 20        | SELECT c FROM sbtest3 WHERE id=?                             | 64252      | 2388.0 |
+| 20        | SELECT c FROM sbtest4 WHERE id=?                             | 64192      | 2379.0 |
+| 20        | SELECT c FROM sbtest1 WHERE id=?                             | 63802      | 2437.0 |
+| 20        | SELECT c FROM sbtest2 WHERE id=?                             | 63652      | 2373.0 |
+| 10        | SELECT c FROM sbtest1 WHERE id=?                             | 6840       | 9108.0 |
+| 10        | SELECT c FROM sbtest2 WHERE id=?                             | 6550       | 8983.0 |
+| 10        | SELECT c FROM sbtest3 WHERE id=?                             | 6530       | 8531.0 |
+| 20        | SELECT SUM(k) FROM sbtest1 WHERE id BETWEEN ? AND ?          | 6526       | 2463.0 |
+| 20        | SELECT c FROM sbtest1 WHERE id BETWEEN ? AND ? ORDER BY c    | 6523       | 2915.0 |
+| 20        | SELECT SUM(k) FROM sbtest2 WHERE id BETWEEN ? AND ?          | 6511       | 2687.0 |
+| 20        | SELECT DISTINCT c FROM sbtest1 WHERE id BETWEEN ? AND ? ORDE | 6502       | 3543.0 |
+| 20        | SELECT c FROM sbtest3 WHERE id BETWEEN ? AND ?               | 6494       | 2259.0 |
+| 10        | SELECT c FROM sbtest4 WHERE id=?                             | 6470       | 8724.0 |
+| 20        | SELECT c FROM sbtest4 WHERE id BETWEEN ? AND ? ORDER BY c    | 6452       | 2935.0 |
+| 20        | SELECT c FROM sbtest1 WHERE id BETWEEN ? AND ?               | 6429       | 2141.0 |
++-----------+--------------------------------------------------------------+------------+--------+

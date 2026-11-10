@@ -1,0 +1,10 @@
+# 2026-11-10 04:22:07  /write x3 (INSERT -> maestro)
+{"escrito_en":"a66ae3af7f10","id_insertado":4,"status":"success"}
+
+{"escrito_en":"a66ae3af7f10","id_insertado":5,"status":"success"}
+
+{"escrito_en":"a66ae3af7f10","id_insertado":6,"status":"success"}
+
+# /read x30 (SELECT -> esclavos): conteo por nodo
+     15 "leido_en":"2dbd8c6ff909"
+     15 "leido_en":"55766f5ded02"

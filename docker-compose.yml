@@ -1,0 +1,82 @@
+networks:
+  db-net:
+    driver: bridge
+
+volumes:
+  master-data:
+  slave1-data:
+  slave2-data:
+  proxysql-data:
+
+services:
+  mysql-master:
+    image: mysql:8.0
+    container_name: mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    networks:
+      - db-net
+    volumes:
+      - master-data:/var/lib/mysql
+    command: --server-id=1 --log-bin=mysql-bin --bind-address=0.0.0.0
+
+  mysql-slave1:
+    image: mysql:8.0
+    container_name: mysql-slave1
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - db-net
+    volumes:
+      - slave1-data:/var/lib/mysql
+    command: --server-id=2 --relay-log=relay-bin --bind-address=0.0.0.0
+
+  mysql-slave2:
+    image: mysql:8.0
+    container_name: mysql-slave2
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - db-net
+    volumes:
+      - slave2-data:/var/lib/mysql
+    command: --server-id=3 --relay-log=relay-bin --bind-address=0.0.0.0
+
+  proxysql:
+    image: proxysql/proxysql:latest
+    container_name: proxysql
+    ports:
+      - "${PROXYSQL_PORT:-3306}:6033"
+    networks:
+      - db-net
+    volumes:
+      - ./proxysql/proxysql.cnf:/etc/proxysql.cnf
+      - proxysql-data:/var/lib/proxysql
+    depends_on:
+      - mysql-master
+      - mysql-slave1
+      - mysql-slave2
+
+  sysbench:
+    image: severalnines/sysbench:latest
+    container_name: sysbench
+    networks:
+      - db-net
+    command: sleep infinity
+
+  webapp:
+    build: ./webapp
+    container_name: webapp
+    environment:
+      DB_HOST: proxysql
+      DB_PORT: 6033
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+    ports:
+      - "${WEBAPP_PORT:-5000}:5000"
+    networks:
+      - db-net
+    depends_on:
+      - proxysql
