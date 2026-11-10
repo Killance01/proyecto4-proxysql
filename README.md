@@ -26,7 +26,3 @@ docker compose up -d
 `docker compose rm -sf proxysql && docker volume rm <prefijo>_proxysql-data && docker compose up -d proxysql`
 * Reiniciar todo desde cero: `docker compose down -v` y repetir el arranque rapido.
 * No ejecutes `init-replication.sh` sobre un cluster que ya replica: resiembra los esclavos.
-
-```
-
-```
