@@ -6,6 +6,7 @@ volumes:
   master-data:
   slave1-data:
   slave2-data:
+  slave3-data:
   proxysql-data:
 
 services:
@@ -42,6 +43,18 @@ services:
     volumes:
       - slave2-data:/var/lib/mysql
     command: --server-id=3 --relay-log=relay-bin --bind-address=0.0.0.0
+
+  mysql-slave3:
+    image: mysql:8.0
+    container_name: mysql-slave3
+    hostname: mysql-slave3
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - db-net
+    volumes:
+      - slave3-data:/var/lib/mysql
+    command: --server-id=4 --relay-log=relay-bin --bind-address=0.0.0.0 --read-only=1
 
   proxysql:
     image: proxysql/proxysql:latest

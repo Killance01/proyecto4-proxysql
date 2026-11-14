@@ -1,0 +1,124 @@
+=== T3: replicacion del tercer esclavo ===
+Posicion del binlog: mysql-bin.000005 2885
+Configurando mysql-slave3...
+== mysql-slave3
+           Replica_IO_Running: Yes
+          Replica_SQL_Running: Yes
+        Seconds_Behind_Source: 0
+                Last_IO_Error: 
+               Last_SQL_Error: 
+=== ANTES DEL ALTA: servidores ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+=== DESPUES DEL ALTA: pool inicial ===
+hostgroup	srv_host	status	Queries
+10	mysql-master	ONLINE	2
+20	mysql-slave1	ONLINE	6
+20	mysql-slave2	ONLINE	6
+20	mysql-slave3	ONLINE	0
+=== PRUEBA: 30 lecturas ===
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"mysql-slave3","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"bf41e5bd35c9","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+{"filas_en_ping":12,"leido_en":"d1da21105002","status":"success"}
+
+HTTP 200
+=== DESPUES DE LAS LECTURAS: pool ===
+hostgroup	srv_host	status	Queries
+10	mysql-master	ONLINE	2
+20	mysql-slave1	ONLINE	17
+20	mysql-slave2	ONLINE	17
+20	mysql-slave3	ONLINE	8
+=== VALIDACION DEL SCRIPT DE ALTA ===
+ Container mysql-slave3 Running 
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+20	mysql-slave3	ONLINE
