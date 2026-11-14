@@ -35,8 +35,8 @@ SQL
 
 docker exec -e MYSQL_PWD="$MYSQL_ROOT_PASSWORD" mysql-master mysqldump -uroot \
   --single-transaction --source-data=2 --flush-privileges --all-databases > "$DUMP"
-LOG_FILE=$(sed -n "s/.*SOURCE_LOG_FILE='\([^']*\)'.*/\1/p" "$DUMP" | head -1)
-LOG_POS=$(sed -n "s/.*SOURCE_LOG_POS=\([0-9]*\).*/\1/p" "$DUMP" | head -1)
+LOG_FILE=$(sed -nE "s/.*(SOURCE|MASTER)_LOG_FILE='([^']*)'.*/\2/p" "$DUMP" | head -1)
+LOG_POS=$(sed -nE "s/.*(SOURCE|MASTER)_LOG_POS=([0-9]*).*/\2/p" "$DUMP" | head -1)
 [ -n "$LOG_FILE" ] || { echo "No se leyo la posicion del binlog (mysqldump antiguo? usa --master-data=2)"; exit 1; }
 echo "Posicion del binlog: $LOG_FILE $LOG_POS"
 
