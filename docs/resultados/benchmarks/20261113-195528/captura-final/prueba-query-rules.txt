@@ -1,0 +1,27 @@
+# 2026-11-13 20:54:34  prueba de query rules (nodo que atiende)
+-- regla 1: SELECT ... FOR UPDATE (maestro)
++--------+--------------+
+| prueba | nodo         |
++--------+--------------+
+| r1     | dc63b29fe43e |
++--------+--------------+
+-- regla 2: SELECT @@ (maestro)
++--------------+
+| nodo         |
++--------------+
+| dc63b29fe43e |
++--------------+
+-- regla 3: funcion no determinista (maestro)
++---------------------+--------------+
+| ahora               | nodo         |
++---------------------+--------------+
+| 2026-11-14 01:54:35 | dc63b29fe43e |
++---------------------+--------------+
+-- regla 4: SELECT normal (esclavo)
++-------+--------------+
+| filas | nodo         |
++-------+--------------+
+|    16 | mysql-slave3 |
++-------+--------------+
+-- reglas 5, 6, 7 y 8: INSERT, UPDATE, DELETE y DDL (maestro)
+ejecutadas

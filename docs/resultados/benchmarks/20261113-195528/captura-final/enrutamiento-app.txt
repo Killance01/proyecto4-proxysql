@@ -1,0 +1,11 @@
+# 2026-11-13 20:54:31  /write x3 (INSERT -> maestro)
+{"escrito_en":"dc63b29fe43e","id_insertado":14,"status":"success"}
+
+{"escrito_en":"dc63b29fe43e","id_insertado":15,"status":"success"}
+
+{"escrito_en":"dc63b29fe43e","id_insertado":16,"status":"success"}
+
+# /read x30 (SELECT -> esclavos): conteo por nodo
+      8 "leido_en":"bf41e5bd35c9"
+      8 "leido_en":"d1da21105002"
+     14 "leido_en":"mysql-slave3"

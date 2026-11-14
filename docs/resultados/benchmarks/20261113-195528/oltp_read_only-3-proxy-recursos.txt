@@ -1,0 +1,8 @@
+CONTAINER ID   NAME           CPU %     MEM USAGE / LIMIT    MEM %     NET I/O           BLOCK I/O        PIDS
+38bcc8ff2808   proxysql       0.38%     36.28MiB / 7.71GiB   0.46%     36.5GB / 36.6GB   11.8MB / 594kB   30
+eaf683781884   mysql-slave3   0.30%     589.2MiB / 7.71GiB   7.46%     484MB / 11.7GB    26.9MB / 964MB   59
+6cfb263e34ef   webapp         0.01%     27.94MiB / 7.71GiB   0.35%     314kB / 209kB     46.4MB / 176kB   1
+d1da21105002   mysql-slave1   0.29%     544.9MiB / 7.71GiB   6.90%     485MB / 11.7GB    9.94MB / 971MB   58
+dc63b29fe43e   mysql-master   0.27%     599MiB / 7.71GiB     7.59%     3.74GB / 102GB    142MB / 583MB    51
+bf41e5bd35c9   mysql-slave2   0.32%     546.1MiB / 7.71GiB   6.92%     485MB / 11.7GB    3.67MB / 971MB   60
+5460abb53353   sysbench       0.00%     11.51MiB / 7.71GiB   0.15%     137GB / 5.02GB    36.3MB / 0B      1
