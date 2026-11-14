@@ -122,3 +122,74 @@ hostgroup_id	hostname	status
 20	mysql-slave1	ONLINE
 20	mysql-slave2	ONLINE
 20	mysql-slave3	ONLINE
+
+============================================================
+=== T3 REPETICION FINAL EN PROXYSQL 2.7.3 ===
+2026-11-14T12:28:20-05:00
+ProxySQL version 2.7.3-12-g50b7f85, codename Truls
+=== ANTES DEL ALTA: servidores ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+=== LEVANTANDO Y CONFIGURANDO REPLICACION DE mysql-slave3 ===
+Esperando a mysql-slave3...
+Posicion del binlog: mysql-bin.000004 2885
+Configurando mysql-slave3...
+== mysql-slave3
+           Replica_IO_Running: Yes
+          Replica_SQL_Running: Yes
+        Seconds_Behind_Source: 0
+                Last_IO_Error: 
+               Last_SQL_Error: 
+=== ALTA EN CALIENTE EN PROXYSQL 2.7.3 ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+20	mysql-slave3	ONLINE
+=== PRUEBA: 30 lecturas repartidas entre los 3 esclavos ===
+  10 "leido_en":"01bffd0d3310"
+   6 "leido_en":"11e65c124ee3"
+  14 "leido_en":"mysql-slave3"
+=== DESPUES: pool de conexiones ===
+hostgroup	srv_host	status	ConnOK	ConnERR	Queries
+10	mysql-master	ONLINE	1	0	2
+20	mysql-slave1	ONLINE	1	0	8
+20	mysql-slave2	ONLINE	1	0	11
+20	mysql-slave3	ONLINE	1	0	14
+
+============================================================
+=== T3 REPETICION FINAL EN PROXYSQL 2.7.3 ===
+2026-11-14T12:38:27-05:00
+ProxySQL version 2.7.3-12-g50b7f85, codename Truls
+=== ANTES DEL ALTA: servidores ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+=== LEVANTANDO Y CONFIGURANDO REPLICACION DE mysql-slave3 ===
+Posicion del binlog: mysql-bin.000005 2885
+Configurando mysql-slave3...
+== mysql-slave3
+           Replica_IO_Running: Yes
+          Replica_SQL_Running: Yes
+        Seconds_Behind_Source: 0
+                Last_IO_Error: 
+               Last_SQL_Error: 
+=== ALTA EN CALIENTE EN PROXYSQL 2.7.3 ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+20	mysql-slave3	ONLINE
+=== PRUEBA: 30 lecturas repartidas entre los 3 esclavos ===
+   8 "leido_en":"01bffd0d3310"
+  12 "leido_en":"11e65c124ee3"
+  10 "leido_en":"mysql-slave3"
+=== DESPUES: pool de conexiones ===
+hostgroup	srv_host	status	ConnOK	ConnERR	Queries
+10	mysql-master	ONLINE	1	0	2
+20	mysql-slave2	ONLINE	1	0	9
+20	mysql-slave1	ONLINE	1	0	14
+20	mysql-slave3	ONLINE	1	0	10

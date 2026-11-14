@@ -165,3 +165,99 @@ Tras recuperar el maestro, volvieron las escrituras y ambos esclavos
 mantuvieron la replicacion activa.
 La configuracion final mantiene al maestro en el hostgroup 10
 y a las replicas en el hostgroup 20.
+
+============================================================
+=== T2 REPETICION FINAL EN PROXYSQL 2.7.3 ===
+2026-11-14T12:27:38-05:00
+ProxySQL version 2.7.3-12-g50b7f85, codename Truls
+=== ANTES: servidores ===
+hostgroup_id	hostname	port	status
+10	mysql-master	3306	ONLINE
+20	mysql-slave1	3306	ONLINE
+20	mysql-slave2	3306	ONLINE
+=== ANTES: escritura y lectura ===
+{"escrito_en":"213518ee734a","id_insertado":1,"status":"success"}
+
+{"filas_en_ping":1,"leido_en":"11e65c124ee3","status":"success"}
+
+=== DURANTE: detener maestro ===
+mysql-master
+=== DURANTE: estado del pool en ProxySQL 2.7.3 ===
+hostgroup	srv_host	status	ConnUsed	ConnFree	ConnERR	Queries
+20	mysql-slave1	ONLINE	0	1	0	1
+20	mysql-slave2	ONLINE	0	0	0	0
+20	mysql-master	ONLINE	0	0	0	0
+=== DURANTE: lectura (HTTP 200 desde esclavos) ===
+{"filas_en_ping":1,"leido_en":"01bffd0d3310","status":"success"}
+
+HTTP 200
+=== DURANTE: escritura (error 9001 al estar caido HG 10) ===
+{"message":"(2013, 'Lost connection to MySQL server during query (The read operation timed out)')","status":"error"}
+
+HTTP 500
+=== RECUPERACION: encender maestro ===
+mysql-master
+=== DESPUES: servidores y pool ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+hostgroup	srv_host	status	ConnUsed	ConnFree	ConnERR	Queries
+10	mysql-master	ONLINE	0	0	0	0
+20	mysql-slave1	ONLINE	0	1	0	1
+20	mysql-slave2	ONLINE	0	1	0	1
+=== DESPUES: escritura y lectura recuperadas ===
+{"escrito_en":"213518ee734a","id_insertado":2,"status":"success"}
+
+HTTP 200
+{"filas_en_ping":1,"leido_en":"11e65c124ee3","status":"success"}
+
+HTTP 200
+
+============================================================
+=== T2 REPETICION FINAL EN PROXYSQL 2.7.3 ===
+2026-11-14T12:37:48-05:00
+ProxySQL version 2.7.3-12-g50b7f85, codename Truls
+=== ANTES: servidores ===
+hostgroup_id	hostname	port	status
+10	mysql-master	3306	ONLINE
+20	mysql-slave1	3306	ONLINE
+20	mysql-slave2	3306	ONLINE
+=== ANTES: escritura y lectura ===
+{"escrito_en":"213518ee734a","id_insertado":3,"status":"success"}
+
+{"filas_en_ping":3,"leido_en":"01bffd0d3310","status":"success"}
+
+=== DURANTE: detener maestro ===
+mysql-master
+=== DURANTE: estado del pool en ProxySQL 2.7.3 ===
+hostgroup	srv_host	status	ConnUsed	ConnFree	ConnERR	Queries
+20	mysql-slave2	ONLINE	0	1	0	1
+20	mysql-slave1	ONLINE	0	0	0	0
+20	mysql-master	SHUNNED	0	0	0	0
+=== DURANTE: lectura (HTTP 200 desde esclavos) ===
+{"filas_en_ping":3,"leido_en":"11e65c124ee3","status":"success"}
+
+HTTP 200
+=== DURANTE: escritura (error 9001 al estar caido HG 10) ===
+{"message":"(9001, 'Max connect timeout reached while reaching hostgroup 10 after 10000ms')","status":"error"}
+
+HTTP 500
+=== RECUPERACION: encender maestro ===
+mysql-master
+=== DESPUES: servidores y pool ===
+hostgroup_id	hostname	status
+10	mysql-master	ONLINE
+20	mysql-slave1	ONLINE
+20	mysql-slave2	ONLINE
+hostgroup	srv_host	status	ConnUsed	ConnFree	ConnERR	Queries
+10	mysql-master	ONLINE	0	0	0	0
+20	mysql-slave2	ONLINE	0	1	0	1
+20	mysql-slave1	ONLINE	0	1	0	1
+=== DESPUES: escritura y lectura recuperadas ===
+{"escrito_en":"213518ee734a","id_insertado":4,"status":"success"}
+
+HTTP 200
+{"filas_en_ping":3,"leido_en":"11e65c124ee3","status":"success"}
+
+HTTP 200
