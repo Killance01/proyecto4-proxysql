@@ -8,6 +8,7 @@ volumes:
   slave2-data:
   slave3-data:
   proxysql-data:
+  proxysql2-data:
 
 services:
   mysql-master:
@@ -57,7 +58,7 @@ services:
     command: --server-id=4 --relay-log=relay-bin --bind-address=0.0.0.0 --read-only=1
 
   proxysql:
-    image: proxysql/proxysql:latest
+    image: proxysql/proxysql:2.7.3
     container_name: proxysql
     ports:
       - "${PROXYSQL_PORT:-3306}:6033"
@@ -65,7 +66,7 @@ services:
       - db-net
     volumes:
       - ./proxysql/proxysql.cnf:/etc/proxysql.cnf
-      - proxysql-data:/var/lib/proxysql
+      - proxysql2-data:/var/lib/proxysql
     depends_on:
       - mysql-master
       - mysql-slave1
