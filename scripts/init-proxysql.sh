@@ -22,6 +22,7 @@ INSERT INTO mysql_users (username,password,default_hostgroup,transaction_persist
 UPDATE global_variables SET variable_value='${MONITOR_USER}' WHERE variable_name='mysql-monitor_username';
 UPDATE global_variables SET variable_value='${MONITOR_PASSWORD}' WHERE variable_name='mysql-monitor_password';
 UPDATE global_variables SET variable_value='true' WHERE variable_name='mysql-multiplexing';
+UPDATE global_variables SET variable_value='false' WHERE variable_name='mysql-monitor_writer_is_also_reader';
 
 DELETE FROM mysql_query_rules;
 INSERT INTO mysql_query_rules (rule_id,active,match_digest,destination_hostgroup,apply,comment) VALUES
