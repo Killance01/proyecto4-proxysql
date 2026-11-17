@@ -11,6 +11,12 @@ cp .env.example .env               # cambia las contrasenas ANTES del primer arr
 docker compose up -d
 ./scripts/init-replication.sh      # usuarios + replicacion
 ./scripts/init-proxysql.sh         # servidores, usuarios, query rules (idempotente)
+docker stop mysql-master           # detener el maestro
+curl -s localhost:5000/read y curl -s localhost:5000/write # probar que la lectura sigue funcionando pero por la caída del maestro la escritura falla
+docker start mysql-master          # iniciar nuevamente el maestro y la escritura funciona
+SELECT hostgroup, srv_host, status FROM stats_mysql_connection_pool; # desde la terminal admin de ProxySQL para verificar el estado SHUNNED en mysql-master
+./scripts/add-slave3.sh            # agregar un tercer esclavo en caliente
+for i in $(seq 15); do curl -s localhost:5000/read; echo; done # probar que ahora en las lecturas aparece mysql-slave3 atendiendo
 
 ```
 
