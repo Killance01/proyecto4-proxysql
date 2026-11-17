@@ -10,7 +10,7 @@ git clone https://github.com/Killance01/proyecto4-proxysql.git && cd proyecto4-p
 cp .env.example .env               # cambia las contrasenas ANTES del primer arranque
 docker compose up -d
 ./scripts/init-replication.sh      # usuarios + replicacion
-./scripts/init-proxysql.sh         # servidores, usuarios, query rules (idempotente)
+./scripts/init-proxysql.sh         # servidores, usuarios, query rules
 SELECT rule_id, match_digest, destination_hostgroup FROM mysql_query_rules; # desde la terminal admin de ProxySQL se verifican las 8 reglas de enrutamiento
 docker stop mysql-master           # detener el maestro
 curl -s localhost:5000/read y curl -s localhost:5000/write # probar que la lectura sigue funcionando pero por la caída del maestro la escritura falla
