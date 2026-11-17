@@ -1,0 +1,14 @@
+2026-11-13T19:55:28-05:00
+Tablas=4 FilasPorTabla=10000 Hilos=16 Duracion=120
+Topologia: un maestro y tres replicas; misma maquina Docker.
+RO: sin transacciones explicitas. RW: transacciones habilitadas.
+CPUs=12 RAM_bytes=8278130688
+ProxySQL version 2.7.3-12-g50b7f85, codename Truls
+sysbench 1.0.17
+mysql  Ver 8.0.46 for Linux on x86_64 (MySQL Community Server - GPL)
+/mysql-master imagen=mysql:8.0 id=sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+/mysql-slave1 imagen=mysql:8.0 id=sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+/mysql-slave2 imagen=mysql:8.0 id=sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+/mysql-slave3 imagen=mysql:8.0 id=sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+/proxysql imagen=proxysql/proxysql:2.7.3 id=sha256:a4d6c35c29498b294d771898f747e2143bc5c8f8b338a58324b1152144f970bb
+/sysbench imagen=severalnines/sysbench:latest id=sha256:64cd003bfa21eaab22f985e7b95f90d21a970229f5f628718657dd1bae669abd

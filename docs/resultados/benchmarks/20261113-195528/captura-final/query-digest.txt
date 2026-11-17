@@ -1,0 +1,19 @@
++-----------+--------------------------------------------------------------+------------+------------+
+| hostgroup | consulta                                                     | count_star | avg_us     |
++-----------+--------------------------------------------------------------+------------+------------+
+| 10        | SELECT c FROM sbtest2 WHERE id=?                             | 104290     | 207.0      |
+| 10        | SELECT c FROM sbtest3 WHERE id=?                             | 104240     | 205.0      |
+| 10        | SELECT c FROM sbtest1 WHERE id=?                             | 104110     | 207.0      |
+| 10        | SELECT c FROM sbtest4 WHERE id=?                             | 103280     | 206.0      |
+| 10        | BEGIN                                                        | 41608      | -3243125.0 |
+| 10        | COMMIT                                                       | 41607      | 33365.0    |
+| 10        | SELECT c FROM sbtest2 WHERE id BETWEEN ? AND ?               | 10621      | 318.0      |
+| 10        | UPDATE sbtest4 SET k=k+? WHERE id=?                          | 10579      | 1868.0     |
+| 10        | SELECT SUM(k) FROM sbtest2 WHERE id BETWEEN ? AND ?          | 10565      | 291.0      |
+| 10        | UPDATE sbtest1 SET c=? WHERE id=?                            | 10508      | 1812.0     |
+| 10        | SELECT DISTINCT c FROM sbtest1 WHERE id BETWEEN ? AND ? ORDE | 10506      | 453.0      |
+| 10        | DELETE FROM sbtest3 WHERE id=?                               | 10500      | 1780.0     |
+| 10        | INSERT INTO sbtest3 (id,k,c,pad) VALUES (?,?,?,?)            | 10500      | 257.0      |
+| 10        | DELETE FROM sbtest4 WHERE id=?                               | 10472      | 2009.0     |
+| 10        | INSERT INTO sbtest4 (id,k,c,pad) VALUES (?,?,?,?)            | 10471      | 255.0      |
++-----------+--------------------------------------------------------------+------------+------------+

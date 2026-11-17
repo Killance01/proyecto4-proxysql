@@ -1,0 +1,13 @@
+carga,repeticion,destino,tps,qps,latencia_media_ms,p95_ms,errores
+oltp_read_only,1,directo,6011.57,84161.92,2.66,4.10,0
+oltp_read_only,1,proxy,2124.70,29745.74,7.53,11.45,0
+oltp_read_only,2,proxy,2114.00,29596.04,7.57,11.45,0
+oltp_read_only,2,directo,6177.02,86478.31,2.59,3.96,0
+oltp_read_only,3,directo,6159.93,86239.02,2.60,4.03,0
+oltp_read_only,3,proxy,2146.67,30053.35,7.45,11.04,0
+oltp_read_write,1,directo,477.30,9546.17,33.51,64.47,2
+oltp_read_write,1,proxy,341.01,6820.30,46.91,78.60,1
+oltp_read_write,2,proxy,340.85,6817.27,46.93,80.03,2
+oltp_read_write,2,directo,380.04,7601.23,42.08,73.13,3
+oltp_read_write,3,directo,375.86,7517.54,42.56,75.82,3
+oltp_read_write,3,proxy,346.44,6928.98,46.17,78.60,1

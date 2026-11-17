@@ -3,7 +3,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 set -a; source .env; set +a
-OUT=docs/resultados
+OUT="${EVIDENCE_OUT:-docs/resultados}"
 APP="localhost:${WEBAPP_PORT:-5000}"
 mkdir -p "$OUT"
 
@@ -47,7 +47,7 @@ viaproxy() {
 # 3) Estado de la replicacion
 {
   echo "# $(date '+%F %T')"
-  for S in mysql-slave1 mysql-slave2; do
+  for S in ${SLAVES:-mysql-slave1 mysql-slave2 mysql-slave3}; do
     echo "== $S"
     docker exec -e MYSQL_PWD="$MYSQL_ROOT_PASSWORD" "$S" mysql -uroot \
       -e "SHOW REPLICA STATUS\G" 2>/dev/null \

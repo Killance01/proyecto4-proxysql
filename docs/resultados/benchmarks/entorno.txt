@@ -1,0 +1,13 @@
+2026-11-13T19:53:20-05:00
+CPUs: 12 | RAM bytes: 8278130688
+ProxySQL version 2.7.3-12-g50b7f85, codename Truls
+sysbench 1.0.17
+mysql  Ver 8.0.46 for Linux on x86_64 (MySQL Community Server - GPL)
+CONTAINER ID   NAME           CPU %     MEM USAGE / LIMIT    MEM %     NET I/O           BLOCK I/O        PIDS
+38bcc8ff2808   proxysql       0.44%     22.4MiB / 7.71GiB    0.28%     69.6kB / 93.7kB   11.8MB / 594kB   30
+eaf683781884   mysql-slave3   0.38%     461.1MiB / 7.71GiB   5.84%     195kB / 129kB     26.7MB / 333MB   46
+6cfb263e34ef   webapp         0.01%     28.71MiB / 7.71GiB   0.36%     314kB / 209kB     46.4MB / 176kB   1
+d1da21105002   mysql-slave1   0.38%     416.9MiB / 7.71GiB   5.28%     1.03MB / 688kB    9.83MB / 340MB   47
+dc63b29fe43e   mysql-master   0.35%     378MiB / 7.71GiB     4.79%     455kB / 329kB     133MB / 16.3MB   43
+bf41e5bd35c9   mysql-slave2   0.36%     417.5MiB / 7.71GiB   5.29%     1.05MB / 696kB    3.53MB / 341MB   47
+5460abb53353   sysbench       0.00%     1.609MiB / 7.71GiB   0.02%     10.1kB / 126B     35.9MB / 0B      1

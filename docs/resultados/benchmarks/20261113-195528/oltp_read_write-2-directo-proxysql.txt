@@ -1,0 +1,5 @@
+hostgroup	srv_host	status	ConnUsed	ConnFree	Queries
+10	mysql-master	ONLINE	0	10	1638449
+20	mysql-slave1	ONLINE	0	15	4314587
+20	mysql-slave2	ONLINE	0	14	4316101
+20	mysql-slave3	ONLINE	0	15	4309841
